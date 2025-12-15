@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>バラFES - OFFICIAL EVENT PAGE</title>
+    <title>バラッチェFES - OFFICIAL EVENT PAGE</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
@@ -95,33 +95,42 @@
             padding: 0 20px 60px;
         }
 
-        /* ヒーローセクション */
+        /* ヒーローセクション（修正箇所） */
         .hero {
             text-align: center;
-            padding: 60px 0 40px;
+            padding: 70px 0 50px;
         }
 
-        .hero h1 {
+        .main-title {
             font-family: 'Montserrat', sans-serif;
-            font-size: 42px;
-            line-height: 1.1;
-            font-weight: 900;
-            margin-bottom: 10px;
+            font-size: 58px; /* サイズを大きく */
+            line-height: 1;
+            font-weight: 900; /* 太く */
+            margin-bottom: 15px;
             text-transform: uppercase;
-            text-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+            /* いい感じのグラデーションカラー */
+            background: linear-gradient(135deg, var(--primary) 0%, #ffffff 50%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            /* 発光感をプラス */
+            filter: drop-shadow(0 0 20px rgba(0, 242, 255, 0.5));
         }
 
-        .hero h1 span {
+        .sub-title {
             display: block;
-            font-size: 24px;
-            color: var(--secondary);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px; /* 少し小さく (以前は24px) */
+            color: var(--primary); /* 青っぽく変更 (以前はピンク) */
             margin-bottom: 5px;
+            font-weight: 700;
+            letter-spacing: 4px;
         }
 
         .hero p {
             color: var(--text-sub);
             font-size: 14px;
             letter-spacing: 2px;
+            margin-top: 10px;
         }
 
         /* セクション共通 */
@@ -349,7 +358,10 @@
     <div class="container">
         
         <section class="hero section">
-            <h1><span>MEN'S IDOL LIVE</span>バラFES</h1>
+            <span class="sub-title">MEN'S IDOL LIVE</span>
+            
+            <h1 class="main-title">バラッチェFES</h1>
+            
             <p>NEXT GENERATION PERFORMANCE</p>
         </section>
 
