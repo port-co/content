@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>アイチャレLIVE - リアルLIVE×トーク企画</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- Reset & Base --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'M PLUS Rounded 1c', 'Hiragino Kaku Gothic Pro', sans-serif;
+            background: linear-gradient(180deg, #fff0f5 0%, #ffe4e1 40%, #e6e6fa 100%);
+            color: #444;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Background Animation (Sparkles/Floating Hearts) --- */
+        .bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: floatUp linear infinite;
+        }
+
+        .particle:nth-child(1) { left: 10%; width: 20px; height: 20px; animation-duration: 15s; bottom: -20px; }
+        .particle:nth-child(2) { left: 30%; width: 40px; height: 40px; animation-duration: 25s; bottom: -40px; }
+        .particle:nth-child(3) { left: 70%; width: 10px; height: 10px; animation-duration: 10s; bottom: -10px; }
+        .particle:nth-child(4) { left: 90%; width: 30px; height: 30px; animation-duration: 18s; bottom: -30px; }
+        .particle:nth-child(5) { left: 50%; width: 50px; height: 50px; animation-duration: 30s; bottom: -50px; background: rgba(255, 192, 203, 0.4); }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.8; }
+            100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- Container --- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Components --- */
+        .section {
+            padding: 80px 0;
+            opacity: 0; /* For scroll animation */
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #ff69b4;
+            text-shadow: 2px 2px 0px #fff;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        h2::after {
+            content: '♥';
+            display: block;
+            font-size: 1.5rem;
+            color: #ffb6c1;
+            margin-top: 5px;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 20px;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,240,245,0) 70%);
+        }
+
+        .hero-content {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 50px;
+            border-radius: 40px;
+            border: 4px solid #fff;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.15);
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff1493, #ff69b4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff69b4;
+            margin-bottom: 30px;
+            display: inline-block;
+            padding: 5px 20px;
+            border-bottom: 3px dotted #ff69b4;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        /* --- Buttons --- */
+        .btn-group {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #55acee; /* X (Twitter) color */
+            border: 2px solid #55acee;
+        }
+
+        .btn-secondary:hover {
+            background: #55acee;
+            color: white;
+        }
+
+        /* --- Features --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border: 2px solid #ffe4e1;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: #ff69b4;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            background: #fff0f5;
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            border-radius: 50%;
+        }
+
+        .mc-profile {
+            background: #fff;
+            border: 3px dashed #ff69b4;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .mc-profile::before {
+            content: 'MC';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff69b4;
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        /* --- Venue & Flow --- */
+        .venue-info {
+            background: rgba(255,255,255,0.8);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .flow-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .flow-step {
+            background: #ff69b4;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .flow-arrow {
+            color: #ff69b4;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* --- Pricing --- */
+        .price-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .price-box {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            text-align: center;
+            width: 300px;
+            border: 2px solid #e6e6fa;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .price-box.vip {
+            border-color: #ffd700;
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2);
+        }
+
+        .price-box.vip::after {
+            content: 'おすすめ';
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: #ffd700;
+            color: #fff;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .price-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #444;
+        }
+
+        .price-value {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #ff69b4;
+            margin: 10px 0;
+        }
+
+        .conditions {
+            background: #f0f8ff;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        /* --- Media --- */
+        .media-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .media-link {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-decoration: none;
+            color: #333;
+            transition: transform 0.2s;
+            border-left: 5px solid #87ceeb;
+        }
+
+        .media-link:hover {
+            transform: translateX(10px);
+            background: #f0f8ff;
+        }
+
+        .media-info {
+            flex: 1;
+        }
+
+        .media-name {
+            font-weight: bold;
+            color: #0066cc;
+            font-size: 1.1rem;
+        }
+
+        /* --- FAQ --- */
+        .faq-item {
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .faq-q {
+            font-weight: bold;
+            color: #ff69b4;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .faq-q::before {
+            content: 'Q.';
+            background: #ff69b4;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255,255,255,0.5);
+            margin-top: 50px;
+        }
+
+        /* --- Mobile --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            .hero .subtitle { font-size: 1.2rem; }
+            h2 { font-size: 2rem; }
+            .btn { width: 100%; text-align: center; }
+            .flow-box { flex-direction: column; }
+            .flow-arrow { transform: rotate(90deg); margin: 5px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <section class="hero" id="top">
+        <div class="hero-content">
+            <p class="subtitle">リアルLIVE × トーク企画</p>
+            <h1>アイチャレ<br>LIVE</h1>
+            <p>都内最強音響のレア会場 × 人気芸人MC</p>
+            <p>ライブもトークも全力で楽しむ新感覚イベント</p>
+            
+            <div class="btn-group">
+                <a href="https://forms.gle/vNT4ccKcPsXfQMaF9" class="btn btn-primary">エントリーする</a>
+                <a href="https://x.com/ichale_live" class="btn btn-secondary">X (Twitter)</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="section">
+            <h2>4つの特徴</h2>
+            
+            <div class="mc-profile">
+                <h3>MC：たかみち店長</h3>
+                <p>TikTokフォロワー50万人超の人気芸人！<br>トークが苦手でも安心。あなたの魅力を引き出します✨</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📺</div>
+                    <h3>トーク企画でPR</h3>
+                    <p>ライブだけでなくトークコーナーでキャラをアピール！ファンを増やすチャンス。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎵</div>
+                    <h3>最高音質の会場</h3>
+                    <p>L-Acoustics A15中心の極上サウンド。最高のパフォーマンス環境を提供。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>出演料なし</h3>
+                    <p>チケットノルマや出演料は一切ありません。気軽に参加可能です。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛍️</div>
+                    <h3>わかりやすい物販制度</h3>
+                    <p>物販手数料は一律3,000円のみ。<br>売上計算がシンプルで安心です。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>会場・スケジュール</h2>
+            <div class="venue-info">
+                <h3>KMAパラダイスホール</h3>
+                <p>〒154-0001 東京都世田谷区池尻3丁目28-8</p>
+                <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">池尻大橋駅 徒歩7分／三軒茶屋駅 徒歩9分・キャパ300人</p>
+                
+                <div style="margin: 30px 0;">
+                    <a href="https://forms.gle/vNT4ccKcPsXfQMaF9" class="btn btn-primary" style="padding: 12px 30px; font-size: 1rem;">開催日程を確認する</a>
+                </div>
+
+                <div class="flow-box">
+                    <div class="flow-step">トーク企画 (15分)</div>
+                    <div class="flow-arrow">➜</div>
+                    <div class="flow-step">ライブ (20分)</div>
+                    <div class="flow-arrow">➜</div>
+                    <div class="flow-step">物販 (60分)</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>チケット・条件</h2>
+            <div class="price-container">
+                <div class="price-box vip">
+                    <div class="price-name">VIP席 (前方)</div>
+                    <div class="price-value">¥3,000</div>
+                    <p>+ 1ドリンク</p>
+                </div>
+                <div class="price-box">
+                    <div class="price-name">一般席 (後方)</div>
+                    <div class="price-value">¥2,000</div>
+                    <p>+ 1ドリンク</p>
+                </div>
+            </div>
+
+            <div class="conditions">
+                <h3 style="color: #ff69b4; margin-bottom: 10px;">応募条件</h3>
+                <ul style="list-style: none;">
+                    <li>💕 集客15名以上を目安としています（罰則はありません）</li>
+                    <li>💕 トーク企画への参加にご快諾いただける方</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>メディア掲載</h2>
+            <div class="media-list">
+                <a href="https://www.galpo.info/feature/208/list/12575" target="_blank" class="media-link">
+                    <div class="media-info">
+                        <div class="media-name">ガルポ！</div>
+                        <div class="media-desc">アイドル・ガールズポップ専門情報サイトに掲載されました</div>
+                    </div>
+                    <span>➜</span>
+                </a>
+                <a href="https://entame01.com/article/16" target="_blank" class="media-link">
+                    <div class="media-info">
+                        <div class="media-name">POETRY ON</div>
+                        <div class="media-desc">生きがい発見メディアにて紹介されました</div>
+                    </div>
+                    <span>➜</span>
+                </a>
+                <a href="https://www.youtube.com/live/yBLOkdPDiA0?si=hKQLXmoAemYXhlVd" target="_blank" class="media-link" style="border-left-color: #ff0000;">
+                    <div class="media-info">
+                        <div class="media-name">YouTubeアーカイブ</div>
+                        <div class="media-desc">過去開催の様子を動画でチェック！</div>
+                    </div>
+                    <span>▶</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>よくある質問</h2>
+            <div class="faq-item">
+                <div class="faq-q">出演料やチケットバックはありますか？</div>
+                <div class="faq-a">出演料はかかりません。チケットバック等の条件についてはエントリー後に詳細をお伝えします。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">物販手数料はいくらですか？</div>
+                <div class="faq-a">一律3,000円を頂戴しております。売上に対するパーセンテージの手数料（ロイヤリティ）はありませんので、売上の計算が簡単です。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">集客が15人未満だった場合は？</div>
+                <div class="faq-a">罰則はありませんが、イベントを盛り上げるために一定の集客努力をお願いしております。</div>
+            </div>
+        </section>
+
+        <section class="section" style="text-align: center; padding-bottom: 100px;">
+            <h3 style="margin-bottom: 20px; font-size: 1.5rem;">新時代のアイドルイベント<br>あなたも参加しませんか？</h3>
+            <a href="https://forms.gle/vNT4ccKcPsXfQMaF9" class="btn btn-primary">今すぐエントリー</a>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; アイチャレLIVE Executive Committee</p>
+    </footer>
+
+    <script>
+        // Simple Scroll Animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.section');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
