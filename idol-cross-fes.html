@@ -37,7 +37,7 @@
             font-weight: 700;
         }
 
-        /* --- Background Animation (Light Beams/Confetti) --- */
+        /* --- Background Animation --- */
         .bg-particles {
             position: fixed;
             top: 0;
@@ -47,19 +47,18 @@
             pointer-events: none;
             z-index: -1;
             overflow: hidden;
-            mix-blend-mode: screen; /* 光が重なるようにする */
+            mix-blend-mode: screen;
         }
 
         .particle {
             position: absolute;
-            background: white; /* 基本は白で光らせる */
+            background: white;
             border-radius: 50%;
             opacity: 0.6;
             box-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-pink);
             animation: floatUp linear infinite;
         }
 
-        /* パーティクルの動きと色を調整 */
         .particle:nth-child(1) { left: 10%; width: 15px; height: 15px; animation-duration: 8s; bottom: -20px; background: var(--neon-blue); }
         .particle:nth-child(2) { left: 30%; width: 25px; height: 25px; animation-duration: 12s; bottom: -40px; background: var(--neon-pink); animation-delay: 2s;}
         .particle:nth-child(3) { left: 70%; width: 10px; height: 10px; animation-duration: 6s; bottom: -10px; background: var(--neon-purple); }
@@ -75,7 +74,7 @@
 
         /* --- Container --- */
         .container {
-            max-width: 1000px; /* 少し幅を広げる */
+            max-width: 1000px;
             margin: 0 auto;
             padding: 0 20px;
         }
@@ -103,8 +102,7 @@
             position: relative;
             display: inline-block;
             width: 100%;
-            font-style: italic; /* 斜体でスピード感を出す */
-            /* ネオンサインのような発光エフェクト */
+            font-style: italic;
             text-shadow: 
                 0 0 5px var(--neon-blue),
                 0 0 15px var(--neon-pink),
@@ -112,7 +110,7 @@
         }
 
         h2::after {
-            content: ''; /* ハートを削除し、光るラインに変更 */
+            content: '';
             display: block;
             width: 80px;
             height: 4px;
@@ -124,7 +122,7 @@
 
         /* --- Hero Section --- */
         .hero {
-            min-height: 90vh; /* 少し高さを調整 */
+            min-height: 90vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -134,7 +132,6 @@
             overflow: hidden;
         }
 
-        /* 背景にスポットライトのような効果を追加 */
         .hero::before {
             content: '';
             position: absolute;
@@ -149,7 +146,6 @@
         }
 
         .hero-content {
-            /* グラスモーフィズム（すりガラス）効果 */
             background: rgba(20, 20, 30, 0.7);
             backdrop-filter: blur(15px);
             padding: 60px 40px;
@@ -161,18 +157,16 @@
         }
 
         .hero h1 {
-            font-size: 5.5rem; /* さらに巨大化 */
+            font-size: 5.5rem;
             line-height: 0.95;
             margin-bottom: 25px;
             font-weight: 900;
             font-style: italic;
             text-transform: uppercase;
-            /* ネオンカラーのグラデーションテキスト */
             background: linear-gradient(135deg, var(--neon-blue) 0%, var(--text-light) 30%, var(--neon-pink) 70%, var(--neon-purple) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -2px;
-            /* 強力な発光エフェクト */
             filter: drop-shadow(0 0 15px rgba(255, 0, 255, 0.6));
         }
 
@@ -186,7 +180,7 @@
             border: 2px solid var(--neon-blue);
             background: rgba(0, 255, 255, 0.1);
             box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
-            transform: skewX(-10deg); /* 少し斜めにして勢いをつける */
+            transform: skewX(-10deg);
         }
 
         .hero p {
@@ -208,7 +202,7 @@
         .btn {
             display: inline-block;
             padding: 20px 50px;
-            border-radius: 5px; /* 丸みを減らしてソリッドに */
+            border-radius: 5px;
             text-decoration: none;
             font-weight: 900;
             font-size: 1.4rem;
@@ -220,7 +214,6 @@
             transform: skewX(-10deg);
         }
 
-        /* テキストを元に戻す */
         .btn span {
             display: block;
             transform: skewX(10deg);
@@ -230,7 +223,6 @@
             background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple));
             color: white;
             border: none;
-            /* 強烈な発光シャドウ */
             box-shadow: 0 5px 20px rgba(255, 0, 255, 0.5),
                         inset 0 0 10px rgba(255, 255, 255, 0.3);
         }
@@ -239,7 +231,7 @@
             transform: skewX(-10deg) translateY(-5px) scale(1.05);
             box-shadow: 0 10px 30px rgba(255, 0, 255, 0.8),
                         0 0 50px rgba(255, 0, 255, 0.4);
-            background: linear-gradient(90deg, var(--neon-purple), var(--neon-pink)); /* グラデーション反転 */
+            background: linear-gradient(90deg, var(--neon-purple), var(--neon-pink));
         }
 
         .btn-secondary {
@@ -255,22 +247,21 @@
             box-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
         }
 
-        /* --- Features --- */
+        /* --- Features (Grid修正箇所) --- */
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            /* PC・タブレットで強制的に2列にする設定 (repeat(2, 1fr)) */
+            grid-template-columns: repeat(2, 1fr);
             gap: 40px;
             margin-top: 40px;
         }
 
         .feature-card {
-            /* ダークなグラスモーフィズムカード */
             background: rgba(30, 30, 40, 0.8);
             backdrop-filter: blur(10px);
             padding: 40px 30px;
             border-radius: 20px;
             text-align: center;
-            /* 光るボーダー */
             border: 2px solid transparent;
             background-clip: padding-box;
             position: relative;
@@ -278,7 +269,6 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
         
-        /* ネオンボーダーの実現 */
         .feature-card::before {
             content: '';
             position: absolute;
@@ -298,14 +288,13 @@
         }
 
         .feature-card:hover::before {
-            opacity: 1; /* ホバー時にボーダーが強く光る */
+            opacity: 1;
         }
 
         .feature-icon {
             font-size: 4rem;
             margin-bottom: 25px;
             display: inline-block;
-            /* アイコン自体を発光させる */
             background: transparent;
             width: auto;
             height: auto;
@@ -338,6 +327,11 @@
             .btn { width: 100%; text-align: center; transform: none; }
             .btn span { transform: none; }
             .hero .subtitle { transform: none; }
+
+            /* スマホでは1列に戻す（無理に2列にすると崩れるため） */
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -398,20 +392,18 @@
     </div>
     
     <script>
-        // スクロールフェードインアニメーション
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                 }
             });
-        }, { threshold: 0.2 }); // 少し見えたら発火
+        }, { threshold: 0.2 });
 
         document.querySelectorAll('.section').forEach((section) => {
             observer.observe(section);
         });
         
-        // ヒーローセクションの要素を順次表示
         window.addEventListener('load', () => {
             const heroContent = document.querySelector('.hero-content');
             heroContent.style.opacity = '0';
