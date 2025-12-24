@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAYA BEAT FES - OFFICIAL EVENT PAGE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #00f2ff; /* ネオンブルー */
+            --secondary: #ff0055; /* ネオンピンク */
+            --bg-dark: #0a0a0a;
+            --bg-card: #1a1a1a;
+            --text-main: #ffffff;
+            --text-sub: #b0b0b0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 背景のアニメーション装飾 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(0, 242, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(255, 0, 85, 0.1) 0%, transparent 40%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* ヘッダー */
+        header {
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 24px;
+            background: linear-gradient(90deg, var(--primary), #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .header-btn {
+            font-size: 12px;
+            font-weight: bold;
+            padding: 8px 16px;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .header-btn:hover {
+            background: var(--primary);
+            color: #000;
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+        }
+
+        /* コンテナ */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+        }
+
+        /* ヒーローセクション */
+        .hero {
+            text-align: center;
+            padding: 70px 0 50px;
+        }
+
+        .main-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 58px; /* サイズを大きく */
+            line-height: 1;
+            font-weight: 900; /* 太く */
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            /* いい感じのグラデーションカラー */
+            background: linear-gradient(135deg, var(--primary) 0%, #ffffff 50%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            /* 発光感をプラス */
+            filter: drop-shadow(0 0 20px rgba(0, 242, 255, 0.5));
+        }
+
+        .sub-title {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            color: var(--primary);
+            margin-bottom: 5px;
+            font-weight: 700;
+            letter-spacing: 4px;
+        }
+
+        .hero p {
+            color: var(--text-sub);
+            font-size: 14px;
+            letter-spacing: 2px;
+            margin-top: 10px;
+        }
+
+        /* セクション共通 */
+        .section {
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 15px;
+            border-left: 5px solid var(--secondary);
+            text-transform: uppercase;
+            font-style: italic;
+        }
+
+        /* カードスタイル */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, transparent 50%, rgba(255, 255, 255, 0.05) 50%);
+            pointer-events: none;
+        }
+
+        /* リストアイテム */
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: var(--text-sub);
+            font-size: 14px;
+            font-weight: bold;
+            width: 80px;
+            flex-shrink: 0;
+        }
+
+        .info-value {
+            text-align: right;
+            font-weight: bold;
+            flex-grow: 1;
+        }
+
+        /* 料金表示 */
+        .price-box {
+            background: linear-gradient(90deg, rgba(255,0,85,0.1), transparent);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 3px solid var(--secondary);
+        }
+
+        .price-title {
+            font-size: 13px;
+            color: var(--secondary);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .price-amount {
+            font-size: 20px;
+            font-weight: 900;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* メリット強調 */
+        .merit-list {
+            list-style: none;
+        }
+
+        .merit-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .merit-item::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: 900;
+        }
+
+        .highlight {
+            color: var(--primary);
+            font-weight: 900;
+            font-size: 1.1em;
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.4);
+        }
+
+        /* アクションボタン */
+        .cta-button {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--secondary), #ff4d88);
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(255, 0, 85, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 0, 85, 0.6);
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-youtube {
+            background: linear-gradient(135deg, #FF0000, #cc0000);
+            box-shadow: 0 5px 20px rgba(255, 0, 0, 0.4);
+            margin-top: 15px;
+        }
+
+        /* FAQ */
+        details {
+            margin-bottom: 10px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        summary {
+            padding: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            list-style: none;
+            position: relative;
+            padding-right: 40px;
+        }
+
+        summary::after {
+            content: '+';
+            position: absolute;
+            right: 15px;
+            color: var(--text-sub);
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        details[open] summary::after {
+            content: '-';
+        }
+
+        .faq-answer {
+            padding: 0 15px 15px;
+            color: var(--text-sub);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* フッター */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-sub);
+            font-size: 12px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">GAYA BEAT</div>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdmvYYjstm8CEqVgLpSQvLkaa2MnHi4slf497JkKdk5lAm-Aw/viewform?usp=header" class="header-btn" target="_blank">ENTRY</a>
+    </header>
+
+    <div class="container">
+        
+        <section class="hero section">
+            <span class="sub-title">MEN'S IDOL LIVE</span>
+            
+            <h1 class="main-title">GAYA BEAT FES</h1>
+            
+            <p>NEXT GENERATION PERFORMANCE</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">VENUE</h2>
+            <div class="card">
+                <h3 style="font-size: 18px; margin-bottom: 10px;">KMAパラダイスホール</h3>
+                <p style="font-size: 13px; color: var(--text-sub); margin-bottom: 15px;">池尻大橋／三軒茶屋エリア</p>
+                <ul class="merit-list" style="font-size: 14px;">
+                    <li class="merit-item">キャパシティ 約300人</li>
+                    <li class="merit-item">天井高8mの圧倒的開放感</li>
+                    <li class="merit-item">総額2000万円超のハイクオリティ機材</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">TICKETS</h2>
+            <div class="card">
+                <div class="price-box">
+                    <div class="price-title">前方優先エリア</div>
+                    <div class="price-amount">¥4,000 <span style="font-size:12px; font-weight:400">+1D(¥600)</span></div>
+                </div>
+                <div class="price-box" style="border-left-color: var(--primary);">
+                    <div class="price-title">一般エリア</div>
+                    <div class="price-amount">¥3,000 <span style="font-size:12px; font-weight:400">+1D(¥600)</span></div>
+                </div>
+                <p style="font-size: 12px; color: var(--text-sub); margin-top: 10px;">
+                    ※当日券は＋700円<br>
+                    ※再入場時の追加ドリンク代不要
+                </p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">PERFORMER</h2>
+            <div class="card" style="border: 1px solid var(--primary);">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <h3 style="font-size: 20px;">出演者募集中</h3>
+                </div>
+                
+                <h4 style="margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 5px;">出演メリット</h4>
+                <ul class="merit-list">
+                    <li class="merit-item">
+                        物販手数料 <span class="highlight">一律 3,000円</span>
+                    </li>
+                    <li class="merit-item">ステージ上でのトーク企画あり</li>
+                    <li class="merit-item">都内トップレベルのステージ演出</li>
+                </ul>
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdmvYYjstm8CEqVgLpSQvLkaa2MnHi4slf497JkKdk5lAm-Aw/viewform?usp=header" class="cta-button" target="_blank">
+                    エントリーする
+                </a>
+                
+                <p style="font-size: 11px; text-align: center; margin-top: 10px; color: var(--text-sub);">
+                    集客目安：5名以上（基準）
+                </p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">FAQ</h2>
+            <div style="margin-top: 10px;">
+                <details>
+                    <summary>出演条件はありますか？</summary>
+                    <div class="faq-answer">
+                        イベントの質と横並び担保のため、集客5名以上のご協力をお願いしております。罰則等はありませんが、基準としてご理解ください。
+                    </div>
+                </details>
+                <details>
+                    <summary>オンライン特典会はありますか？</summary>
+                    <div class="faq-answer">
+                        今回は実施いたしません。ライブと物販のリアル体験に特化したイベントとなります。
+                    </div>
+                </details>
+                <details>
+                    <summary>物販手数料について詳しく</summary>
+                    <div class="faq-answer">
+                        売上の％バックではなく、一律3,000円を頂戴しております。それ以上の売上はすべて出演者様に還元されます。
+                    </div>
+                </details>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2024 GAYA BEAT FES Executive Committee.</p>
+    </footer>
+
+    <script>
+        // スクロールアニメーション
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px'
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section) => {
+                observer.observe(section);
+            });
+            
+            // 最初の要素を少し早く表示
+            setTimeout(() => {
+                if(sections[0]) sections[0].classList.add('visible');
+            }, 100);
+        });
+    </script>
+</body>
+</html>
