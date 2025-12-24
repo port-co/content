@@ -6,16 +6,19 @@
     <title>GAYA BEAT FES - OFFICIAL EVENT PAGE</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Noto+Sans+JP:wght@500;700;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary: #00f2ff; /* ネオンブルー */
-            --secondary: #ff0055; /* ネオンピンク */
-            --bg-dark: #0a0a0a;
-            --bg-card: #1a1a1a;
-            --text-main: #ffffff;
-            --text-sub: #b0b0b0;
+            /* 配色を明るいフェス仕様に変更 */
+            --bg-color: #ffffff;
+            --bg-pattern: #f0f4f8;
+            --primary: #ff8c00; /* エネルギッシュなオレンジ */
+            --secondary: #ff0055; /* ビビッドピンク */
+            --accent: #00d2ff; /* 爽やかなシアン */
+            --text-main: #333333;
+            --text-sub: #666666;
+            --card-bg: #ffffff;
         }
 
         * {
@@ -26,36 +29,51 @@
 
         body {
             font-family: 'Noto Sans JP', sans-serif;
-            background-color: var(--bg-dark);
+            background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
+            /* 紙吹雪のような背景パターン */
+            background-image: 
+                radial-gradient(var(--primary) 1px, transparent 1px),
+                radial-gradient(var(--secondary) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
         }
 
-        /* 背景のアニメーション装飾 */
+        /* 装飾的な背景グラデーション */
         body::before {
             content: '';
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 10% 20%, rgba(0, 242, 255, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(255, 0, 85, 0.1) 0%, transparent 40%);
+            top: -20%;
+            right: -20%;
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(circle, rgba(255, 140, 0, 0.15), transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -20%;
+            left: -20%;
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(circle, rgba(0, 210, 255, 0.15), transparent 70%);
             z-index: -1;
             pointer-events: none;
         }
 
         /* ヘッダー */
         header {
-            background: rgba(10, 10, 10, 0.9);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             padding: 15px 20px;
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -64,28 +82,29 @@
         .logo {
             font-family: 'Montserrat', sans-serif;
             font-weight: 900;
-            font-size: 24px;
-            background: linear-gradient(90deg, var(--primary), #ffffff);
+            font-size: 26px;
+            /* カラフルなロゴ */
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -1px;
         }
 
         .header-btn {
-            font-size: 12px;
-            font-weight: bold;
-            padding: 8px 16px;
-            border: 1px solid var(--primary);
-            color: var(--primary);
+            font-size: 13px;
+            font-weight: 900;
+            padding: 10px 20px;
+            background: var(--text-main);
+            color: #fff;
             border-radius: 50px;
             text-decoration: none;
             transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
         .header-btn:hover {
-            background: var(--primary);
-            color: #000;
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+            transform: scale(1.05);
+            background: var(--secondary);
         }
 
         /* コンテナ */
@@ -98,80 +117,98 @@
         /* ヒーローセクション */
         .hero {
             text-align: center;
-            padding: 60px 0 50px;
+            padding: 60px 0 40px;
+        }
+
+        .sub-title {
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            background: var(--text-main);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            letter-spacing: 2px;
         }
 
         .main-title {
             font-family: 'Montserrat', sans-serif;
-            font-size: 52px;
-            line-height: 1;
+            font-size: 56px;
+            line-height: 0.9;
             font-weight: 900;
             margin-bottom: 15px;
             text-transform: uppercase;
-            background: linear-gradient(135deg, var(--primary) 0%, #ffffff 50%, var(--secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 20px rgba(0, 242, 255, 0.5));
+            color: var(--text-main);
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.1);
         }
 
-        .sub-title {
-            display: block;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 16px;
-            color: var(--primary);
-            margin-bottom: 5px;
-            font-weight: 700;
-            letter-spacing: 4px;
+        .main-title span {
+            color: var(--secondary);
         }
 
         .hero p {
-            color: var(--text-main); /* 色を少し明るく */
-            font-weight: bold;
-            font-size: 15px;
-            letter-spacing: 1px;
-            margin-top: 10px;
-            margin-bottom: 30px;
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 40px;
         }
 
-        /* 新しい特徴リスト（ヒーロー下部） */
+        /* 特徴リスト（デザイン刷新：大きくポップに） */
         .hero-features {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            justify-content: center;
-            align-items: center;
+            gap: 15px;
         }
 
         .hero-feature-box {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-size: 13px;
-            font-weight: bold;
-            width: 100%;
-            max-width: 320px;
+            background: #fff;
+            padding: 25px 20px; /* パディングを大きく */
+            border-radius: 16px;
+            font-size: 18px; /* フォントサイズアップ */
+            font-weight: 900; /* 太字強調 */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            transition: transform 0.2s;
             display: flex;
             align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: transform 0.3s;
+            text-align: left;
+        }
+
+        /* 3つのボックスそれぞれの色味 */
+        .feature-1 {
+            background: linear-gradient(135deg, #fff5e6, #fff);
+            border-color: var(--primary);
+            color: #d35400;
+        }
+        .feature-2 {
+            background: linear-gradient(135deg, #ffe6ee, #fff);
+            border-color: var(--secondary);
+            color: #c2185b;
+        }
+        .feature-3 {
+            background: linear-gradient(135deg, #e0f7fa, #fff);
+            border-color: var(--accent);
+            color: #0097a7;
         }
 
         .hero-feature-box:hover {
-            transform: scale(1.02);
-            border-color: var(--primary);
+            transform: translateY(-5px);
         }
 
-        .hero-feature-icon {
-            color: var(--secondary);
-            margin-right: 10px;
-            font-size: 16px;
+        .feature-icon {
+            font-size: 32px; /* アイコンを巨大化 */
+            margin-right: 15px;
+            min-width: 40px;
+            text-align: center;
         }
 
         /* セクション共通 */
         .section {
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.6s ease, transform 0.6s ease;
@@ -183,39 +220,34 @@
         }
 
         .section-title {
-            /* 英語フォント指定削除または日本語向け調整 */
-            /* font-family: 'Montserrat', sans-serif; */
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 900;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            text-align: center; /* 見出しを中央寄せに */
+            color: var(--text-main);
             position: relative;
-            padding-left: 15px;
-            border-left: 5px solid var(--secondary);
-            /* text-transform: uppercase; 日本語なので不要 */
-            /* font-style: italic; 日本語だと読みづらいので削除 */
-            letter-spacing: 1px;
+            display: inline-block;
+            width: 100%;
         }
 
-        /* カードスタイル */
-        .card {
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 25px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .card::after {
+        /* 見出しの装飾（下線マーカー風） */
+        .section-title::after {
             content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, transparent 50%, rgba(255, 255, 255, 0.05) 50%);
-            pointer-events: none;
+            display: block;
+            width: 60px;
+            height: 6px;
+            background: var(--primary);
+            margin: 5px auto 0;
+            border-radius: 10px;
+        }
+
+        /* カードスタイル（明るいシャドウ） */
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px; /* 角丸を強く */
+            padding: 30px 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); /* 影をふんわりと */
+            border: 1px solid rgba(0,0,0,0.03);
         }
 
         /* リストアイテム */
@@ -223,8 +255,8 @@
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px 0;
+            border-bottom: 2px dashed #eee; /* 実線から点線へ変更してポップに */
         }
 
         .info-row:last-child {
@@ -234,37 +266,48 @@
         .info-label {
             color: var(--text-sub);
             font-size: 14px;
-            font-weight: bold;
-            width: 80px;
-            flex-shrink: 0;
+            font-weight: 700;
         }
 
         .info-value {
             text-align: right;
-            font-weight: bold;
-            flex-grow: 1;
+            font-weight: 900;
+            color: var(--text-main);
+            font-size: 16px;
         }
 
         /* 料金表示 */
         .price-box {
-            background: linear-gradient(90deg, rgba(255,0,85,0.1), transparent);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            border-left: 3px solid var(--secondary);
+            background: #fff0f5; /* 薄いピンク背景 */
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 2px solid var(--secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .price-title {
-            font-size: 13px;
+            font-size: 15px;
             color: var(--secondary);
-            font-weight: bold;
-            margin-bottom: 5px;
+            font-weight: 900;
         }
 
         .price-amount {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 900;
             font-family: 'Montserrat', sans-serif;
+            color: var(--text-main);
+        }
+
+        /* 一般エリアの色変更 */
+        .price-box.normal {
+            background: #e0f7fa;
+            border-color: var(--accent);
+        }
+        .price-box.normal .price-title {
+            color: #0097a7;
         }
 
         /* メリット強調 */
@@ -274,99 +317,85 @@
 
         .merit-item {
             position: relative;
-            padding-left: 30px;
-            margin-bottom: 15px;
+            padding-left: 35px;
+            margin-bottom: 18px;
             font-weight: bold;
+            font-size: 15px;
+            color: var(--text-main);
         }
 
         .merit-item::before {
-            content: '✓';
+            content: '★';
             position: absolute;
             left: 0;
+            top: -2px;
             color: var(--primary);
-            font-weight: 900;
+            font-size: 20px;
         }
 
         .highlight {
-            color: var(--primary);
+            color: var(--secondary);
             font-weight: 900;
-            font-size: 1.1em;
-            text-shadow: 0 0 10px rgba(0, 242, 255, 0.4);
+            font-size: 1.2em;
+            background: linear-gradient(transparent 70%, #ffeb3b 70%); /* 黄色マーカー */
         }
 
-        /* アクションボタン */
+        /* アクションボタン（グラデーションで立体的に） */
         .cta-button {
             display: block;
             width: 100%;
-            padding: 18px;
+            padding: 20px;
             text-align: center;
-            background: linear-gradient(135deg, var(--secondary), #ff4d88);
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
             color: white;
             text-decoration: none;
-            font-weight: bold;
-            font-size: 18px;
+            font-weight: 900;
+            font-size: 20px;
             border-radius: 50px;
-            box-shadow: 0 5px 20px rgba(255, 0, 85, 0.4);
+            box-shadow: 0 10px 25px rgba(255, 0, 85, 0.3);
             transition: transform 0.2s, box-shadow 0.2s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: 0.5s;
         }
 
         .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 0, 85, 0.6);
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 0, 85, 0.5);
         }
 
         /* FAQ */
         details {
-            margin-bottom: 10px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 8px;
-            overflow: hidden;
+            margin-bottom: 15px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
         }
 
         summary {
-            padding: 15px;
+            padding: 20px;
             cursor: pointer;
-            font-weight: bold;
-            list-style: none;
+            font-weight: 900;
+            color: var(--text-main);
             position: relative;
-            padding-right: 40px;
+            padding-right: 50px;
         }
 
         summary::after {
-            content: '+';
+            content: 'Q';
             position: absolute;
-            right: 15px;
-            color: var(--text-sub);
+            right: 20px;
+            color: var(--primary);
+            font-weight: 900;
+            font-family: 'Montserrat', sans-serif;
             font-size: 20px;
-            line-height: 1;
-        }
-
-        details[open] summary::after {
-            content: '-';
         }
 
         .faq-answer {
-            padding: 0 15px 15px;
+            padding: 0 20px 20px;
             color: var(--text-sub);
             font-size: 14px;
-            line-height: 1.6;
+            line-height: 1.8;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 15px;
         }
 
         /* フッター */
@@ -375,7 +404,7 @@
             padding: 40px 20px;
             color: var(--text-sub);
             font-size: 12px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            background: #f9f9f9;
         }
 
     </style>
@@ -392,22 +421,22 @@
         <section class="hero section">
             <span class="sub-title">MEN'S IDOL LIVE</span>
             
-            <h1 class="main-title">GAYA BEAT FES</h1>
+            <h1 class="main-title">GAYA<br><span>BEAT</span> FES</h1>
             
-            <p>リアルLIVEとトーク企画のお祭りイベント</p>
+            <p>リアルLIVEとトーク企画のお祭りイベント！</p>
 
             <div class="hero-features">
-                <div class="hero-feature-box">
-                    <span class="hero-feature-icon">★</span>
-                    熱狂必至のリアルライブステージ
+                <div class="hero-feature-box feature-1">
+                    <span class="feature-icon">🔥</span>
+                    <div>熱狂必至の<br>リアルライブステージ</div>
                 </div>
-                <div class="hero-feature-box">
-                    <span class="hero-feature-icon">🎤</span>
-                    素顔が見える！限定トーク企画
+                <div class="hero-feature-box feature-2">
+                    <span class="feature-icon">🎉</span>
+                    <div>グループの垣根を越えた<br>トーク企画</div>
                 </div>
-                <div class="hero-feature-box">
-                    <span class="hero-feature-icon">🤝</span>
-                    会場一体で盛り上がるお祭り空間
+                <div class="hero-feature-box feature-3">
+                    <span class="feature-icon">🤝</span>
+                    <div>会場一体で盛り上がる<br>お祭り空間</div>
                 </div>
             </div>
         </section>
@@ -415,9 +444,9 @@
         <section class="section">
             <h2 class="section-title">会場情報</h2>
             <div class="card">
-                <h3 style="font-size: 18px; margin-bottom: 10px;">KMAパラダイスホール</h3>
-                <p style="font-size: 13px; color: var(--text-sub); margin-bottom: 15px;">池尻大橋／三軒茶屋エリア</p>
-                <ul class="merit-list" style="font-size: 14px;">
+                <h3 style="font-size: 20px; margin-bottom: 10px; font-weight:900;">KMAパラダイスホール</h3>
+                <p style="font-size: 14px; color: var(--text-sub); margin-bottom: 20px;">池尻大橋／三軒茶屋エリア</p>
+                <ul class="merit-list">
                     <li class="merit-item">キャパシティ 約300人</li>
                     <li class="merit-item">天井高8mの圧倒的開放感</li>
                     <li class="merit-item">総額2000万円超のハイクオリティ機材</li>
@@ -430,13 +459,13 @@
             <div class="card">
                 <div class="price-box">
                     <div class="price-title">前方優先エリア</div>
-                    <div class="price-amount">¥4,000 <span style="font-size:12px; font-weight:400">+1D(¥600)</span></div>
+                    <div class="price-amount">¥4,000 <span style="font-size:12px; font-weight:700; color:#888;">+1D</span></div>
                 </div>
-                <div class="price-box" style="border-left-color: var(--primary);">
+                <div class="price-box normal">
                     <div class="price-title">一般エリア</div>
-                    <div class="price-amount">¥3,000 <span style="font-size:12px; font-weight:400">+1D(¥600)</span></div>
+                    <div class="price-amount">¥3,000 <span style="font-size:12px; font-weight:700; color:#888;">+1D</span></div>
                 </div>
-                <p style="font-size: 12px; color: var(--text-sub); margin-top: 10px;">
+                <p style="font-size: 13px; color: var(--text-sub); margin-top: 15px; text-align: center;">
                     ※当日券は＋700円<br>
                     ※再入場時の追加ドリンク代不要
                 </p>
@@ -445,25 +474,25 @@
 
         <section class="section">
             <h2 class="section-title">出演者募集</h2>
-            <div class="card" style="border: 1px solid var(--primary);">
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <h3 style="font-size: 20px;">出演者募集中</h3>
+            <div class="card" style="border: 2px solid var(--primary); background: #fffaf0;">
+                <div style="text-align: center; margin-bottom: 25px;">
+                    <h3 style="font-size: 22px; color: var(--text-main);">出演者募集中！</h3>
                 </div>
                 
-                <h4 style="margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 5px;">出演メリット</h4>
+                <h4 style="margin-bottom: 15px; border-bottom: 2px solid #ddd; padding-bottom: 10px; font-weight:900;">出演メリット</h4>
                 <ul class="merit-list">
                     <li class="merit-item">
                         物販手数料 <span class="highlight">一律 3,000円</span>
                     </li>
-                    <li class="merit-item">ステージ上でのトーク企画あり</li>
+                    <li class="merit-item">グループの垣根を越えたトーク企画</li>
                     <li class="merit-item">都内トップレベルのステージ演出</li>
                 </ul>
 
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdmvYYjstm8CEqVgLpSQvLkaa2MnHi4slf497JkKdk5lAm-Aw/viewform?usp=header" class="cta-button" target="_blank">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdmvYYjstm8CEqVgLpSQvLkaa2MnHi4slf497JkKdk5lAm-Aw/viewform?usp=header" class="cta-button" target="_blank" style="margin-top: 20px;">
                     エントリーする
                 </a>
                 
-                <p style="font-size: 11px; text-align: center; margin-top: 10px; color: var(--text-sub);">
+                <p style="font-size: 12px; text-align: center; margin-top: 15px; color: var(--text-sub); font-weight: bold;">
                     集客目安：5名以上（基準）
                 </p>
             </div>
@@ -479,7 +508,7 @@
                     </div>
                 </details>
                 <details>
-                    <summary>オンライン特典会はありますか？</summary>
+                    <summary>オンライン特典会は？</summary>
                     <div class="faq-answer">
                         今回は実施いたしません。ライブと物販のリアル体験に特化したイベントとなります。
                     </div>
