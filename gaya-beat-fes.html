@@ -98,21 +98,19 @@
         /* ヒーローセクション */
         .hero {
             text-align: center;
-            padding: 70px 0 50px;
+            padding: 60px 0 50px;
         }
 
         .main-title {
             font-family: 'Montserrat', sans-serif;
-            font-size: 58px; /* サイズを大きく */
+            font-size: 52px;
             line-height: 1;
-            font-weight: 900; /* 太く */
+            font-weight: 900;
             margin-bottom: 15px;
             text-transform: uppercase;
-            /* いい感じのグラデーションカラー */
             background: linear-gradient(135deg, var(--primary) 0%, #ffffff 50%, var(--secondary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            /* 発光感をプラス */
             filter: drop-shadow(0 0 20px rgba(0, 242, 255, 0.5));
         }
 
@@ -127,10 +125,48 @@
         }
 
         .hero p {
-            color: var(--text-sub);
-            font-size: 14px;
-            letter-spacing: 2px;
+            color: var(--text-main); /* 色を少し明るく */
+            font-weight: bold;
+            font-size: 15px;
+            letter-spacing: 1px;
             margin-top: 10px;
+            margin-bottom: 30px;
+        }
+
+        /* 新しい特徴リスト（ヒーロー下部） */
+        .hero-features {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-feature-box {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: bold;
+            width: 100%;
+            max-width: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+
+        .hero-feature-box:hover {
+            transform: scale(1.02);
+            border-color: var(--primary);
+        }
+
+        .hero-feature-icon {
+            color: var(--secondary);
+            margin-right: 10px;
+            font-size: 16px;
         }
 
         /* セクション共通 */
@@ -147,15 +183,17 @@
         }
 
         .section-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 28px;
+            /* 英語フォント指定削除または日本語向け調整 */
+            /* font-family: 'Montserrat', sans-serif; */
+            font-size: 24px;
             font-weight: 900;
             margin-bottom: 20px;
             position: relative;
             padding-left: 15px;
             border-left: 5px solid var(--secondary);
-            text-transform: uppercase;
-            font-style: italic;
+            /* text-transform: uppercase; 日本語なので不要 */
+            /* font-style: italic; 日本語だと読みづらいので削除 */
+            letter-spacing: 1px;
         }
 
         /* カードスタイル */
@@ -294,12 +332,6 @@
             left: 100%;
         }
 
-        .cta-youtube {
-            background: linear-gradient(135deg, #FF0000, #cc0000);
-            box-shadow: 0 5px 20px rgba(255, 0, 0, 0.4);
-            margin-top: 15px;
-        }
-
         /* FAQ */
         details {
             margin-bottom: 10px;
@@ -362,11 +394,26 @@
             
             <h1 class="main-title">GAYA BEAT FES</h1>
             
-            <p>NEXT GENERATION PERFORMANCE</p>
+            <p>リアルLIVEとトーク企画のお祭りイベント</p>
+
+            <div class="hero-features">
+                <div class="hero-feature-box">
+                    <span class="hero-feature-icon">★</span>
+                    熱狂必至のリアルライブステージ
+                </div>
+                <div class="hero-feature-box">
+                    <span class="hero-feature-icon">🎤</span>
+                    素顔が見える！限定トーク企画
+                </div>
+                <div class="hero-feature-box">
+                    <span class="hero-feature-icon">🤝</span>
+                    会場一体で盛り上がるお祭り空間
+                </div>
+            </div>
         </section>
 
         <section class="section">
-            <h2 class="section-title">VENUE</h2>
+            <h2 class="section-title">会場情報</h2>
             <div class="card">
                 <h3 style="font-size: 18px; margin-bottom: 10px;">KMAパラダイスホール</h3>
                 <p style="font-size: 13px; color: var(--text-sub); margin-bottom: 15px;">池尻大橋／三軒茶屋エリア</p>
@@ -379,7 +426,7 @@
         </section>
 
         <section class="section">
-            <h2 class="section-title">TICKETS</h2>
+            <h2 class="section-title">チケット料金</h2>
             <div class="card">
                 <div class="price-box">
                     <div class="price-title">前方優先エリア</div>
@@ -397,7 +444,7 @@
         </section>
 
         <section class="section">
-            <h2 class="section-title">PERFORMER</h2>
+            <h2 class="section-title">出演者募集</h2>
             <div class="card" style="border: 1px solid var(--primary);">
                 <div style="text-align: center; margin-bottom: 20px;">
                     <h3 style="font-size: 20px;">出演者募集中</h3>
@@ -423,7 +470,7 @@
         </section>
 
         <section class="section">
-            <h2 class="section-title">FAQ</h2>
+            <h2 class="section-title">よくある質問</h2>
             <div style="margin-top: 10px;">
                 <details>
                     <summary>出演条件はありますか？</summary>
